@@ -1,0 +1,50 @@
+<div class="landing-page">
+  <h1 class="moving-text">Welcome to KoksalBanking App (All banks in one app)</h1>
+  <p class="moving-text"> <strong> Manage your finances with ease </strong></p>
+</div>
+<% if user_signed_in? %>
+<div class="landing-page">
+  <h2 class="moving-text"> This is the list of banks </h2>
+ <ul class="moving-text">
+  <% @banks.each do |bank| %>
+    <li><%= link_to bank.bankName, bank_path(bank) %></li>
+  <% end %>
+  
+  <%else %>
+
+    <div class="button-group",  style="padding: 22px">
+    <h2> Please sign up to access this list of Banks </h2>
+    <% @banks.each do |bank| %>
+    <li> <%= bank.bankName %> </li>
+    <% end %>
+    <br>
+    <p><strong> Note:</strong> Your sign up request status will be annouced within 24 hours by admin </p>
+    <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+    <%= link_to "Log In", new_user_session_path, class: "btn btn-secondary" %>
+  </div>
+  <% %>
+ </ul>
+</div>
+<% end %>
+
+
+<!-- 
+<div class="landing-page">
+  <h1 class="moving-text">Welcome to Koksal Banking App</h1>
+  <p class="moving-text">Manage your finances with ease.</p>
+  <h2 class="moving-text"> This is the list of banks </h2>
+ <ul class="moving-text">
+  <% @banks.each do |bank| %>
+    <li><%= link_to bank.bankName, bank_path(bank) %></li>
+  <% end %>
+  
+  <h2> Please sign up to see the list of Banks </h2>
+    <div class="button-group">
+    <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+    <%= link_to "Log In", new_user_session_path, class: "btn btn-secondary" %>
+  </div>
+  <% %>
+ </ul>
+</div>
+
+-->
