@@ -1,0 +1,23 @@
+<div>
+<h1>Users Awaiting Approval</h1>
+<% @users.each do |user| %>
+  <p><%= user.name %>: <%= user.email %></p>
+  <%= link_to 'Edit', edit_user_path(user) %>
+<% end %>
+</div>
+
+
+<div>
+<h1> List of Approved Users </h1>
+<ul>
+  <% @users.each do |user| %>
+    <div>
+      <a href="<%= user_path(user) %>">
+      <br><br>
+      <h3>  <%= user.first_name%> <%= user.last_name %> </h3>
+      </a>
+    </div>
+  <% end %>
+  <br>
+  <%= link_to "Back", root_path, class: "btn btn-secondary" %>
+</ul>
