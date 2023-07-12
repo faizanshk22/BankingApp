@@ -4,9 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :firstname, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :dateofbirth, presence: true
+  validates :date_of_birth, presence: true
   validates :phone, presence: true, uniqueness: true 
   validates :gender, presence: true                                   
 

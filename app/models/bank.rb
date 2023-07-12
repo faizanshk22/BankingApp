@@ -1,5 +1,5 @@
 class Bank < ApplicationRecord
 
-    validates :bankName, presence: true, uniqueness: true
+    validates :bank_name, presence: true, uniqueness: true
 
 end
