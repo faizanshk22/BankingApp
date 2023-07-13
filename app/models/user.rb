@@ -8,6 +8,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :phone, uniqueness: true 
 
+  enum approved: { pending: 0, confirmed: 1, declined: 2 }
+
+  has_many :accounts
 
                              
 end

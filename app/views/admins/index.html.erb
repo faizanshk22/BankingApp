@@ -1,23 +1,20 @@
+<div style="padding: 22px">
+<h1>Admin Dashboard</h1>
+<br>
 <div>
-<h1>Users Awaiting Approval</h1>
-<% @users.each do |user| %>
-  <p><%= user.name %>: <%= user.email %></p>
-  <%= link_to 'Edit', edit_user_path(user) %>
-<% end %>
+  <h2>Users Awaiting Approval</h2>
+  <% @users.each do |user| %>
+    <% unless user.admin? %>
+    <a href="<%= user_path(user) %>"> 
+     <strong> <%= user.first_name %> </strong> <br>
+     </a>
+     <p> <%= user.email %></p>
+    <% end %>
+  <% end %>
+</div>
 </div>
 
 
-<div>
-<h1> List of Approved Users </h1>
-<ul>
-  <% @users.each do |user| %>
-    <div>
-      <a href="<%= user_path(user) %>">
-      <br><br>
-      <h3>  <%= user.first_name%> <%= user.last_name %> </h3>
-      </a>
-    </div>
-  <% end %>
-  <br>
-  <%= link_to "Back", root_path, class: "btn btn-secondary" %>
-</ul>
+
+
+

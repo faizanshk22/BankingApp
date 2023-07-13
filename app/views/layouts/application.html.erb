@@ -17,11 +17,11 @@
    <% if user_signed_in? %> 
    <p> <strong> Logged in as </strong> <%= current_user.email %>  <p> 
    <% end %>
-   </div>
+   
    
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
+   </div>
 
     <%= yield %>
 

@@ -1,13 +1,12 @@
 <div class="landing-page">
   <h1 class="moving-text">Welcome to KoksalBanking App (All banks in one app)</h1>
   <p class="moving-text"> <strong> Manage your finances with ease </strong></p>
-<% if user_signed_in? %>
+  <% if user_signed_in? %>
   <h2 class="moving-text"> This is the list of banks </h2>
  <ul class="moving-text">
   <% @banks.each do |bank| %>
     <li><%= link_to bank.bank_name, bank_path(bank) %></li>
   <% end %>
-  
   <%else %>
 
     <div class="button-group">

@@ -1,0 +1,14 @@
+<h1>Your Accounts</h1>
+<% if @accounts.any? %>
+  <ul>
+    <% @accounts.each do |account| %>
+      <li>
+        <strong>Account Number:</strong> <%= account.account_number %>
+        <br>
+        <strong>Balance:</strong> <%= account.balance %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No accounts found.</p>
+<% end %>
