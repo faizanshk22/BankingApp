@@ -1,9 +1,13 @@
+<div style="padding: 22px">
 <h1>Your Accounts</h1>
 <% if @accounts.any? %>
   <ul>
     <% @accounts.each do |account| %>
+     <br>
       <li>
-        <strong>Account Number:</strong> <%= account.account_number %>
+      <strong>Bank Name:</strong> <%= account.bank.bank_name %>
+      <br>
+        <strong>Account Number:</strong> <%= account.account_no%> 
         <br>
         <strong>Balance:</strong> <%= account.balance %>
       </li>
@@ -12,3 +16,5 @@
 <% else %>
   <p>No accounts found.</p>
 <% end %>
+<%= link_to 'Back', banks_path, class: 'btn btn-secondary' %>
+</div>

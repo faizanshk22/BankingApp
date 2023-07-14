@@ -1,9 +1,9 @@
 <div style="padding: 22px">
   <h2><%= @bank.bank_name %></h2><br>
   <h1>Accounts Details</h1><br>
-
-    <%= link_to "Create your new accounts", new_account_path, class: 'btn btn-mini' %>
-  <br>
-  <br>
+    <%= link_to "Create your new accounts", new_bank_account_path(@bank.id), class: 'btn btn-mini' %>
+  <br><br>
+  <%= link_to 'View Accounts', bank_accounts_path(@bank), class: 'btn btn-primary' %>
+<br><br>
   <%= link_to 'Back', banks_path, class: 'btn btn-secondary' %>
 </div>

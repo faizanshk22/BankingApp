@@ -1,6 +1,12 @@
+<div style="padding: 22px">
 <h1>Account Details</h1>
 <br>
-<p>Account Number: <%= @account.account_no %></p>
-<p>Balance: <%= @account.balance %></p>
+<% @accounts.each do |account| %>
+<li>
+<p>Account Number: <%= account.account_no %></p>
+<p>Balance: <%= account.balance %></p>
+</li>
+<% end %>
 
-
+<%= link_to 'Back', bank_accounts_path, class: 'btn btn-secondary' %>
+</div>

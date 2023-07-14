@@ -7,9 +7,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :banks 
+  resources :banks do
     resources :accounts
-  
+  end 
+
   
   
   
