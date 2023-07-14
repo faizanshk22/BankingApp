@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  #before_action :authenticate_admin!
+  before_action :authenticate_admin!
 
   def index
     #@users = User.where(approved: User.approved[:pending]) 
@@ -20,10 +20,10 @@ class AdminsController < ApplicationController
 
   private
 
-  #def authenticate_admin!
-   # unless current_user&.admin?
-    #  redirect_to root_path, alert: 'You are not authorized to access this page.'
-   # end
-  # end
+  def authenticate_admin!
+    unless current_user&.admin?
+      redirect_to root_path
+    end
+  end
 end
 

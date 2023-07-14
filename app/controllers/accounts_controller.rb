@@ -2,12 +2,14 @@ class AccountsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @accounts = current_user.accounts
+    @bank = Bank.find(params[:bank_id])
+  @accounts = @bank.accounts.where(user_id: current_user.id)
   end
 
   def show
     @user = current_user
     @account = Account.find(params[:id])
+    @account.bank_id = params[:bank_id]
   end
 
   def new
@@ -28,14 +30,22 @@ class AccountsController < ApplicationController
   end
 
   def edit
+    @account = Account.find(params[:id])
   end
 
   def update
+    @account = Account.find(params[:id])
+    if @account.update(account_params)
+      redirect_to account_path(@account), notice: 'Account was successfully updated.'
+    else
+      render :edit 
+    end
   end
-
   def destroy
+    @account = Account.find(params[:id])
+    @account.destroy
+    redirect_to bank_path(params[:bank_id]), notice: 'Account was successfully deleted'
   end
-
   private
 
   def account_params

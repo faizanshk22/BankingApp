@@ -1,9 +1,14 @@
 <div style="padding: 22px">
   <h2><%= @bank.bank_name %></h2><br>
   <h1>Accounts Details</h1><br>
-    <%= link_to "Create your new accounts", new_bank_account_path(@bank.id), class: 'btn btn-mini' %>
+  <% if current_user.accounts.exists?(bank_id: @bank.id) %>
+  <p> You have an account in this bank </p>
+  <% else %>
+    <%= link_to "Create your account", new_bank_account_path(@bank.id), class: 'btn btn-mini' %>
+    <% end%>
   <br><br>
-  <%= link_to 'View Accounts', bank_accounts_path(@bank), class: 'btn btn-primary' %>
+  <%= link_to 'View Account', bank_accounts_path(@bank), class: 'btn btn-mini' %>
 <br><br>
   <%= link_to 'Back', banks_path, class: 'btn btn-secondary' %>
 </div>
+

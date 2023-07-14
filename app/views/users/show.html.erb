@@ -10,5 +10,21 @@
   <p><strong>Phone:</strong> <%= @user.phone %></p>
 </div>
 
-<%= link_to 'Back', admins_index_path, class: 'btn btn-secondary' %>
+<h2>Accounts</h2>
+
+<% if @user.accounts.any? %>
+  <ul>
+    <% @user.accounts.each do |account| %>
+      <li><%= link_to "#{account.bank.bank_name} Account", bank_account_path(account.bank, account) %> </li>
+      <br>
+    <% end %>
+  </ul>
+<% end %>
+<%= link_to "Edit Profile" , edit_user_path(@user), class: "btn btn-primary" %> <br> <br>
+
+<% if current_user.admin? %>
+  <%= link_to "Back", admins_index_path, class: "btn btn-secondary" %>
+<% else %>
+  <%= link_to "Back", root_path, class: "btn btn-secondary" %>
+<% end %>
 </div>

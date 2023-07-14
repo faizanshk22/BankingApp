@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   }
 
   resources :banks do
-    resources :accounts
+    resources :accounts 
   end 
 
   

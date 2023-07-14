@@ -1,7 +1,7 @@
 <%= form_for [@user, @bank, @account] do |f| %>
   <% if @account.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@account.errors.count, "error") %> You are providing a wrong bank details: </h2>
+      <h2><%= pluralize(@account.errors.count, "error") %> You are providing a wrong account details: </h2>
 
       <ul>
         <% @account.errors.full_messages.each do |message| %>

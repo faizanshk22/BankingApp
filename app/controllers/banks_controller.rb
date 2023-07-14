@@ -1,10 +1,14 @@
 class BanksController < ApplicationController
   before_action :authenticate_user!, only: [:show]
-
+  
+  
   def index
+    if current_user && current_user.admin?
+      redirect_to admins_index_path
+    else
     @banks = Bank.all
+    end
   end
-
   def show
     @bank = Bank.find(params[:id])
   rescue ActiveRecord::RecordNotFound
@@ -30,4 +34,5 @@ class BanksController < ApplicationController
   def bank_params
     params.require(:bank).permit(:bank_name)
   end
+  
 end

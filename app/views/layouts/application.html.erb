@@ -17,8 +17,13 @@
    <% if user_signed_in? %> 
    <p> <strong> Logged in as </strong> <%= current_user.email %>  <p> 
    <% end %>
-   
-   
+   <% if user_signed_in? %>
+   <a href="<%= user_path(current_user) %>" class="user-link" style="color: #333;">
+  <p class="moving-text">
+    <strong><%= current_user.first_name %> <%= current_user.last_name %></strong>
+  </p>
+</a>
+   <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
    </div>
