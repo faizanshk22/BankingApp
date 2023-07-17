@@ -1,0 +1,31 @@
+<div style="padding: 22px">
+  <h1>Pending Account Requests</h1>
+
+  <% if @pending_accounts.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Bank</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @pending_accounts.each do |account| %>
+          <tr>
+            <td><%= account.user.email %></td>
+            <td><%= account.bank.bank_name %></td>
+            <td>
+              <%= link_to 'Approve', approve_account_path(account), method: :patch, class: 'btn btn-primary' %>
+              <%= link_to 'Decline', decline_account_path(account), method: :patch, class: 'btn btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No pending account requests found.</p>
+  <% end %>
+
+  <%= link_to 'Back', admins_index_path, class: 'btn btn-secondary' %>
+</div>

@@ -1,28 +1,14 @@
-<%= form_for [@user, @bank, @account] do |f| %>
-  <% if @account.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@account.errors.count, "error") %> You are providing a wrong account details: </h2>
+<div style="padding: 22px">
+  <%= form_for @account do |f| %>
+  
 
-      <ul>
-        <% @account.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="field">
+      <%= f.label :bank_id, "Select Bank" %>
+      <%= f.collection_select :bank_id, Bank.all, :id, :bank_name, prompt: "Select a Bank" %>
+    </div>
+<br>
+    <div class="actions">
+      <%= f.submit "Create Account", class: "btn btn-primary" %>
     </div>
   <% end %>
-  <div>
-    <%= f.label :account_no %>
-    <%= f.text_field :account_no %>
-  </div>
-  <br>
-  <div>
-    <%= f.label :balance %>
-    <%= f.number_field :balance %>
-  </div>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-
-  <br>
-  <div>
-    <%= f.submit 'Create' %>
-  </div>
-<% end %>
+</div>

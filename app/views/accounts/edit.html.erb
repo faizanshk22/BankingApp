@@ -4,5 +4,6 @@
 <%= render 'accountform' %>
 <br>
 <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+<%= link_to 'Delete Account',  account_path(@account), data: {turbo_method: :delete,  turbo_confirm: "Are you sure"} , class: 'btn btn-danger' %>
 
 </div>

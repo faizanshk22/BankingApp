@@ -7,10 +7,11 @@ class User < ApplicationRecord
   validates :first_name,:last_name,:email,:date_of_birth,:phone,:gender, presence: true
   validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :phone, uniqueness: true 
+  
+  has_many :pending_accounts, -> { where(status: :pending) }, class_name: 'Account'
 
-  enum approved: { pending: 0, confirmed: 1, declined: 2 }
 
-  has_many :accounts
+  has_many :accounts , dependent: :destroy
 
                              
 end

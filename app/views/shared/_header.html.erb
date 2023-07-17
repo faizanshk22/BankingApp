@@ -1,12 +1,38 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #87CEEB;">  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #87CEEB;">
+  <div class="container-fluid">
     <%= link_to "Online Banking", root_path, class: "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <% if user_signed_in? %>
-    <div class="navbar-nav ms-auto">
-      <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
-    </div>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <%= link_to "Banks", banks_path, class: "nav-link" %>
+          <% unless current_user.admin? %>
+            <%= link_to "Create New Account", new_account_path, class: "nav-link" %>
+          <% else %>
+            <%= link_to "Create New Bank", new_bank_path, class: "nav-link" %>
+          <% end %>
+        </div>
+        <div class="navbar-nav ms-auto">
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.email %>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
+            <% unless current_user.admin?%>
+              <%= link_to "Accounts", accounts_path, class: "dropdown-item" %>
+              <% end %>
+              <li><hr class="dropdown-divider"></li>
+              <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </ul>
+          </div>
+        </div>
+      </div>
     <% end %>
+  </div>
 </nav>
+
+
 

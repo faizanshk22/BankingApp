@@ -1,5 +1,10 @@
 <div style= "padding: 13px;">
 <h1>Edit Profile</h1>
 <%= render 'userform' %>
+<br>
+
+<% if current_user.admin? && @user != current_user %>
+  <%= link_to 'Delete User', user_path(@user), data: { turbo_method: :delete, turbo_confirm: 'Are you sure' }, class: 'btn btn-danger' %>
+<% end %>
 </div>
 

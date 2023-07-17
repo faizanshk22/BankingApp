@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_090251) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_17_092057) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
     t.string "account_no"
     t.decimal "balance"
+    t.integer "status", default: 0, null: false
     t.bigint "bank_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -29,6 +30,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_090251) do
     t.string "bank_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.string "transaction_type"
+    t.decimal "amount"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_transactions_on_account_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,11 +55,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_090251) do
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "approved"
+    t.boolean "approved"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "accounts", "banks"
   add_foreign_key "accounts", "users"
+  add_foreign_key "transactions", "accounts"
 end

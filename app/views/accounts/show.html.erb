@@ -4,9 +4,20 @@
 <div>
 <p>Account Number: <%= @account.account_no %></p>
 <p>Balance: <%= @account.balance %></p>
+<p><strong>Status:</strong> <%= @account.status.capitalize %></p>
 </div>
+ <% if current_user&.admin? && @account.pending? %>
+    <%= link_to 'Approve Account', approve_account_admin_path(@account), method: :post, class: 'btn btn-primary' %>
+  <% end %>
+  
+ <% if current_user.admin? %>
+<%= link_to 'Edit', edit_account_path(@account), class: 'btn btn-primary' %>
+<% end %>
 
-<%= link_to 'Edit', edit_bank_account_path(@account), class: 'btn btn-primary'%>
-<%= link_to 'Back', bank_account_path(@account), class: 'btn btn-secondary'%>
+<% unless current_user.admin? %>
+  <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+<% end %>
+
+
 <br>
 </div>

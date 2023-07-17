@@ -5,13 +5,35 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   # def new
-  #   super
+   # self.resource = resource_class.new(sign_in_params)
+   # clean_up_passwords(resource)
+   # yield resource if block_given?
+   # respond_with(resource, serialize_options(resource))
   # end
 
   # POST /resource/sign_in
   # def create
   #   super
   # end
+  #def create
+   # user = User.find_by(email: params[:user][:email].downcase)
+  
+    #if user&.valid_password?(params[:user][:password])
+    #  if user.approved?
+     #   sign_in(user)
+      #  redirect_to root_path, notice: "Logged in successfully."
+      #else
+      #  flash.now[:alert] = "Your account is awaiting admin approval. Please wait for approval."
+      #  render 'new'
+     # end
+   # else
+    #  flash.now[:alert] = "Invalid email or password."
+     # render 'new'
+   # end
+ # end
+  
+  
+
 
   # DELETE /resource/sign_out
   # def destroy

@@ -2,28 +2,24 @@ class AccountsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @bank = Bank.find(params[:bank_id])
-  @accounts = @bank.accounts.where(user_id: current_user.id)
+    @accounts = current_user.accounts
   end
 
   def show
     @user = current_user
     @account = Account.find(params[:id])
-    @account.bank_id = params[:bank_id]
   end
 
   def new
-    @bank = Bank.find(params[:bank_id])
     @account = Account.new
-    
   end
 
   def create
-    @account = current_user.accounts.build(account_params) 
-    @account.bank_id = params[:bank_id]
+    @account = Account.new(account_params)
     @account.user = current_user
-    if @account.save!
-      redirect_to bank_account_path(params[:bank_id],@account.id), notice: 'Account was successfully created.'
+    @account.status = :pending
+    if @account.save
+      redirect_to account_path(@account), notice: 'Account was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,10 +38,10 @@ class AccountsController < ApplicationController
     end
   end
   def destroy
-    @account = Account.find(params[:id])
-    @account.destroy
-    redirect_to bank_path(params[:bank_id]), notice: 'Account was successfully deleted'
-  end
+    account = Account.find(params[:id])
+    account.destroy
+    redirect_to root_path, notice: 'Account successfully cancelled.'
+  end  
   private
 
   def account_params

@@ -1,21 +1,22 @@
 <div style="padding: 22px">
-<h1>Your Account</h1>
-<% if @accounts.any? %>
+  <h1>Your Accounts</h1>
+  <% if @accounts.any? %>
     <% @accounts.each do |account| %>
-     <br>
+      <br>
       <li>
-      <strong>Bank Name:</strong> <%= account.bank.bank_name %>
-      <br> 
-         <a href="<%= bank_account_path(account.bank, account)%>">
-        <strong>Account Number: </strong> <%= account.account_no%> 
+        <strong>Bank Name:</strong> <%= account.bank.bank_name %>
+        <br> 
+        <a href="<%= account_path(account) %>">
+          <strong>Account Number:  </strong> <%= account.account_no %>
         </a>
         <br>
+        <strong>Status:</strong> <%= account.status.capitalize %>
+      
       </li>
       <br>
-      <%= link_to 'Back', bank_path(account.bank), class: 'btn btn-secondary' %>
     <% end %>
-<% else %>
-  <p>No accounts found.</p>
-<% end %>
-
+  <% else %>
+    <p>No accounts found.</p>
+  <% end %>
+  <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
 </div>

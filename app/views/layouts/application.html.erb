@@ -10,26 +10,17 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body style="background-color: #f1f1f1;">
+<body class="bg-light" >
   <%= render partial: "shared/header" %>
- 
+
+   
    <div style="padding: 22px">
-   <% if user_signed_in? %> 
-   <p> <strong> Logged in as </strong> <%= current_user.email %>  <p> 
-   <% end %>
-   <% if user_signed_in? %>
-   <a href="<%= user_path(current_user) %>" class="user-link" style="color: #333;">
-  <p class="moving-text">
-    <strong><%= current_user.first_name %> <%= current_user.last_name %></strong>
-  </p>
-</a>
-   <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    </div>
    </div>
 
     <%= yield %>
-
-
+ <%=render partial: "shared/footer" %>
   </body>
 </html>
