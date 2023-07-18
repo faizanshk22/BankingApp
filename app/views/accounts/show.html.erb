@@ -9,11 +9,10 @@
  <% if current_user&.admin? && @account.pending? %>
     <%= link_to 'Approve Account', approve_account_admin_path(@account), method: :post, class: 'btn btn-primary' %>
   <% end %>
-  
+  <p>
  <% if current_user.admin? %>
 <%= link_to 'Edit', edit_account_path(@account), class: 'btn btn-primary' %>
 <% end %>
 
-<br><br>
-  <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Back', root_path, class: 'btn btn-secondary' %> </p>
 </div>

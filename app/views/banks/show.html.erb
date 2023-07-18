@@ -22,7 +22,7 @@
     <% if users.any? %>
       <ul>
         <% users.each do |user| %>
-          <li> <a href="<%= user_path(user) %>"><strong>User:</strong> <%= user.email %> </a></li>
+          <li> <a href="<%= user_path(user) %>" style="text-decoration: none;"><strong>User:</strong> <%= user.email %> </a></li>
           <% user_accounts = user.accounts.where(bank_id: @bank.id) %>
           <% if user_accounts.any? %>
             <ul>
@@ -43,8 +43,8 @@
     <% else %>
       <p>No users found for this bank.</p>
     <% end %>
+   <p>
     <%= link_to 'Edit this bank', edit_bank_path(@bank), class: 'btn btn-primary' %>
   <% end %>
-  <br><br>
-  <%= link_to 'Back', banks_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Back', banks_path, class: 'btn btn-secondary' %> </p>
 </div>

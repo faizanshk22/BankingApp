@@ -2,7 +2,7 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show]
 
   def index
-   @transactions = Transaction.all
+    @transactions = Transaction.joins(:account).where(accounts: { user_id: current_user.id })
   end
 
   def show

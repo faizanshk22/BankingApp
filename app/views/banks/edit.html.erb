@@ -7,8 +7,7 @@
   <%= f.submit 'Update' %>
 <% end %>
 <br><br>
+<p>
 <%= link_to 'Delete Bank', @bank, method: :delete,data: {turbo_method: :delete,  turbo_confirm: "Are you sure"} , class: 'btn btn-danger' %>
-<br>
-<br>
-<%= link_to 'Back', banks_path, class: 'btn btn-secondary'%>
+<%= link_to 'Back', banks_path, class: 'btn btn-secondary'%> </p>
 </div>

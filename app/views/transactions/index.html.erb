@@ -1,4 +1,33 @@
 <div style='padding: 22px'>
-<h1>Transactions#index</h1>
-
+  <div class="alert alert-info" role="alert">
+    <h1>Your Transaction History</h1>
+    <% if @transactions.any? %>
+      <% @transactions.each do |transaction| %>
+        <br>
+        <li>
+          <strong>Account Number:</strong> <%= transaction.account.account_no %>
+          <br> 
+          <% if transaction.account.bank %>
+            <strong>Bank Name:</strong> <%= transaction.account.bank.bank_name %>
+          <% else %>
+            <strong>Bank Name:</strong> N/A
+          <% end %>
+          <br>
+          <a href="<%= transaction_path(transaction) %>" style="text-decoration: none;">
+            <strong>Transaction Type:</strong> <%= transaction.transaction_type %>
+          </a>
+          <br>
+          <strong>Amount:</strong> <%= transaction.amount %>
+          <br>
+          <strong>Balance:</strong> <%= transaction.account.balance %>
+        </li>
+        <br>
+      <% end %>
+    <% else %>
+      <p>No transactions found yet.</p>
+    <% end %>
+    <%= link_to "Make a transaction", new_transaction_path, class: 'btn btn-primary'%>
+    <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+    <br><br>
+  </div>
 </div>

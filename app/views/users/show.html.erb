@@ -15,7 +15,7 @@
       <h2>Accounts</h2>
       <ul>
         <% @user.accounts.each do |account| %>
-        <a href="<%= account_path(account) %>" style="color: #333;">
+        <a href="<%= account_path(account) %>" style="text-decoration: none;">
           <li><%= "#{account.bank.bank_name} Account" %></li>
           </a>
           <br>
@@ -23,6 +23,8 @@
       </ul>
     <% end %>
   <% end %>
-  <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-primary" %> <br> <br>
-  <%= link_to "Back", current_user.admin? ? admins_index_path : root_path, class: "btn btn-secondary" %>
+  <p>
+  <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-primary" %> 
+  <%= link_to "Back", current_user.admin? ? admins_index_path : root_path, class: "btn btn-secondary" %> 
+  </p>
 </div>
