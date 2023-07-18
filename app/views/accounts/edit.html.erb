@@ -1,7 +1,9 @@
 <div style="padding: 22px">
 <h1> Edit Account </h1>
-
-<%= render 'accountform' %>
+<p><strong>User: </strong> <%= @user.first_name %> <%= @user.last_name %> </p>
+<p><strong>Email </strong> <%= @user.email %> </p>
+<p><strong>Account Number: </strong> <%= @account.account_no %></p>
+<p><strong>Balance: </strong><%= @account.balance %></p>
 <br>
 <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
 <%= link_to 'Delete Account',  account_path(@account), data: {turbo_method: :delete,  turbo_confirm: "Are you sure"} , class: 'btn btn-danger' %>

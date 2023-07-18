@@ -28,11 +28,16 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    if current_user.admin? && params[:id].to_i != current_user.id
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   def update
     @user = current_user
+    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user), notice: 'Profile updated successfully.'
     else

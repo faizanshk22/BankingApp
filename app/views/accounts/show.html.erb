@@ -14,10 +14,6 @@
 <%= link_to 'Edit', edit_account_path(@account), class: 'btn btn-primary' %>
 <% end %>
 
-<% unless current_user.admin? %>
+<br><br>
   <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
-<% end %>
-
-
-<br>
 </div>

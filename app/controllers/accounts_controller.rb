@@ -27,6 +27,7 @@ class AccountsController < ApplicationController
 
   def edit
     @account = Account.find(params[:id])
+    @user = @account.user
   end
 
   def update
