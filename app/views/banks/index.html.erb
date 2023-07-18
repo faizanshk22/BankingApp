@@ -4,8 +4,9 @@
   <p> Manage your finances with ease </p>
   <% @banks.each do |bank| %>
   <br>
-    <h2><%=link_to bank.bank_name, bank_path(bank) %></h2>
-
+  <a href="<%= bank_path(bank) %>" style="color: #333;">
+    <h2><%= bank.bank_name  %></h2>
+</a>
  
 <% end %>
 </div>

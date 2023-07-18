@@ -6,7 +6,7 @@
     <div class="alert alert-info" role="alert">
       <% @users.each do |user| %>
         <% unless user.admin? %>
-          <a href="<%= user_path(user) %>">  <br>
+          <a href="<%= user_path(user) %>" style="color: #333;">  <br>
             <strong><%= user.first_name %> <%= user.last_name%></strong> <br>
           </a>
           <p><%= user.email %></p>

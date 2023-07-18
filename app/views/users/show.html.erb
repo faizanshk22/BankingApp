@@ -15,7 +15,9 @@
       <h2>Accounts</h2>
       <ul>
         <% @user.accounts.each do |account| %>
-          <li><%= link_to "#{account.bank.bank_name} Account", account_path(account) %></li>
+        <a href="<%= account_path(account) %>" style="color: #333;">
+          <li><%= "#{account.bank.bank_name} Account" %></li>
+          </a>
           <br>
         <% end %>
       </ul>

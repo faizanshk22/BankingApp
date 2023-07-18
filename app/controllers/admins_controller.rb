@@ -17,9 +17,7 @@ class AdminsController < ApplicationController
     account.update(status: 'declined')
     redirect_to admins_index_path, notice: 'Account declined successfully.'
   end
-  def account_requests
-    @pending_accounts = Account.pending.includes(:user, :bank)
-  end
+  
   #def show
    # @admin = current_user
   #end

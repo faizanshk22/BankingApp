@@ -1,12 +1,12 @@
 class BanksController < ApplicationController
   before_action :authenticate_user!, only: [:show]
   before_action :require_admin, except: [:index, :show]
+  before_action :to_find_bank, only: [:show, :edit, :update, :destroy]
   
   def index
     @banks = Bank.all
   end
   def show
-    @bank = Bank.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to banks_path, alert: "Bank not found"
   end
@@ -25,11 +25,8 @@ class BanksController < ApplicationController
     end
   end
   def edit
-    @bank = Bank.find(params[:id])
   end
   def update
-    @bank = Bank.find(params[:id])
-
     if @bank.update(bank_params)
       redirect_to @bank, notice: "Bank updated successfully."
     else
@@ -38,10 +35,14 @@ class BanksController < ApplicationController
   end
 
   def destroy
-    @bank = Bank.find(params[:id])
     @bank.destroy
     redirect_to banks_path, notice: 'Bank was successfully destroyed.'
   end
+
+  def to_find_bank
+    @bank = Bank.find(params[:id])
+  end
+
   private
 
   def bank_params

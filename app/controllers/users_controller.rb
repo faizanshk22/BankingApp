@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :to_find_the_user, only: [:show, :edit, :destroy, :create_account_request]
+
+
   def index
     if user_signed_in?
       @user = current_user
@@ -8,7 +11,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     rescue ActiveRecord::RecordNotFound
     redirect_to user_path(current_user), alert: "User not found"
   end
@@ -29,7 +31,6 @@ class UsersController < ApplicationController
 
   def edit
     if current_user.admin? && params[:id].to_i != current_user.id
-      @user = User.find(params[:id])
     else
       @user = current_user
     end
@@ -46,12 +47,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to root_path, notice: 'User was successfully deleted.'
   end
   def create_account_request
-    @user = User.find(params[:id])
     @bank = Bank.find(params[:bank_id])
     @account = @bank.accounts.build(user: @user, status: :pending)
 
@@ -60,6 +59,9 @@ class UsersController < ApplicationController
     else
       redirect_to bank_path(@bank), alert: 'Account creation request failed.'
     end
+  end
+  def to_find_the_user
+    @user = User.find(params[:id])
   end
   private
 
