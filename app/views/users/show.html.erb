@@ -1,24 +1,31 @@
-<div style="padding: 22px">
-  <h1>User Details</h1>
+<div class="moving-text" style="padding: 22px">
+  <div class="text-center p-3">
+  <h1 class="bordered-div" style="color: blue">User Details</h1> </div>
 
-  <div>
+  <div style="color:black">
     <p><strong>First Name:</strong> <%= @user.first_name %></p>
     <p><strong>Last Name:</strong> <%= @user.last_name %></p>
     <p><strong>Email:</strong> <%= @user.email %></p>
     <p><strong>Gender:</strong> <%= @user.gender %></p>
     <p><strong>DOB:</strong> <%= @user.date_of_birth %></p>
     <p><strong>Phone:</strong> <%= @user.phone %></p>
-  </div>
+     <p>
+    <%if @user.header_image.attached?%>
+  <%= image_tag @user.header_image, class: "img-fluid", style: "max-width: 250px; height: auto;" %>
+  <% end %>
+ </p>
 
+  </div>
+  <div>
   <% if current_user.admin? && @user != current_user %>
     <% if @user.accounts.any? %>
-      <h2>Accounts</h2>
+      <h2><strong>Accounts</strong></h2>
       <ul>
         <% @user.accounts.each do |account| %>
         <a href="<%= account_path(account) %>" style="text-decoration: none;">
-          <li><%= "#{account.bank.bank_name} Account" %></li>
+          <li><strong><%= "#{account.bank.bank_name} Account" %></strong></li><br>
           </a>
-          <br>
+       
         <% end %>
       </ul>
     <% end %>
@@ -27,4 +34,5 @@
   <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-primary" %> 
   <%= link_to "Back", current_user.admin? ? admins_index_path : root_path, class: "btn btn-secondary" %> 
   </p>
+  <br><br>
 </div>

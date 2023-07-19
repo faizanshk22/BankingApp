@@ -1,5 +1,5 @@
 <%= form_for @user, url: user_path(@user), method: :patch, html: { multipart: true } do |f| %>
-   <div style="padding: 13px;">
+   <div style="padding: 13px; color:black" >
    <div class="field">
     <%= f.label :first_name %> <br>
     <%= f.text_field :first_name %>
@@ -21,7 +21,11 @@
   <div class="field">
     <%= f.label :gender %>
     <%= f.select :gender, ["Male", "Female", "Other"] %>
-  </div>
+  </div><br>
+  <div class="field">
+   <%= f.file_field :header_image %>
+ </div>
+
   
   <br>
   <%= f.submit "Update", class: "btn btn-primary" %> 

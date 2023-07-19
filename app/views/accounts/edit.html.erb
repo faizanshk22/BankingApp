@@ -1,11 +1,12 @@
-<div style="padding: 22px">
-<h1> Edit Account </h1>
+<div class="moving-text" style="padding: 22px">
+<div class="text-center p-3"> 
+<h1 class="bordered-div" style="color: blue"> Edit Account </h1> </div>
+<div style="color:black">
 <p><strong>User: </strong> <%= @user.first_name %> <%= @user.last_name %> </p>
 <p><strong>Email </strong> <%= @user.email %> </p>
 <p><strong>Account Number: </strong> <%= @account.account_no %></p>
-<p><strong>Balance: </strong><%= @account.balance %></p>
+<p><strong>Balance: </strong><%= @account.balance %></p> </div>
 <br>
 <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
 <%= link_to 'Delete Account',  account_path(@account), data: {turbo_method: :delete,  turbo_confirm: "Are you sure"} , class: 'btn btn-danger' %>
-
 </div>

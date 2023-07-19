@@ -1,8 +1,8 @@
-<div style="padding: 22px">
+<div >
   <%= form_for @transaction do |f| %>
     <div class="field">
       <%= f.label :amount %>
-      <%= f.number_field :amount, min: 0 %>
+      <%= f.number_field :amount, min: 0%>
     </div>
     <br>
     <div class="field">
@@ -19,6 +19,8 @@
     <br>
     <div class="actions">
       <%= f.submit "Make a Transaction", class: "btn btn-primary" %>
+<%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+
     </div>
   <% end %>
 </div>

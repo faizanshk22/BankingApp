@@ -33,12 +33,11 @@ class TransactionsController < ApplicationController
       end
     end
   
-    if @transaction.errors.empty? && @transaction.save
+    if @transaction.save
       @account.save
       redirect_to @transaction, notice: 'Transaction was successfully created.'
     else
-      flash.now[:alert] = @transaction.errors.full_messages.join(', ')
-      render :new, status: :unprocessable_entity, turbo_frame: 'transaction-form'
+      render :new, status: :unprocessable_entity
     end
   end
   

@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :phone, uniqueness: true 
   
   has_many :pending_accounts, -> { where(status: :pending) }, class_name: 'Account'
-
+  has_one_attached :header_image
 
   has_many :accounts , dependent: :destroy
 

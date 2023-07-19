@@ -10,15 +10,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-<body class="bg-info" >
+<body>
   <%= render partial: "shared/header" %>
 
    
-   <div style="padding: 22px">
-    <p class="notice"><%= notice %></p>
+    <p class="notice" style="padding: 22px; color: black"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    </div>
-   </div>
 
     <%= yield %>
  <%=render partial: "shared/footer" %>

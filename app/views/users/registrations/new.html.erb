@@ -33,6 +33,9 @@
     <%= f.label :gender %>
     <%= f.select :gender, ["Male", "Female", "Other"] %>
   </div><br>
+  <div class="field">
+   <%= f.file_field :header_image %>
+  </div>
 
   <div class="field">
     <%= f.label :password %>

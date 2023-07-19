@@ -1,13 +1,15 @@
-<div style="padding: 22px">
+<div class="moving-text" style="padding: 22px">
 
 <%= form_for @bank do |f| %>
+<div style="color:black">
   <%= f.label :bank_name %>
-  <%= f.text_field :bank_name %>
+  <%= f.text_field :bank_name %> </div>
   <br>
-  <%= f.submit 'Update' %>
+  <p>
+  <%= f.submit 'Update', class: 'btn btn-primary' %>
+  <%= link_to 'Back', banks_path, class: 'btn btn-secondary'%> </p>
 <% end %>
 <br><br>
-<p>
 <%= link_to 'Delete Bank', @bank, method: :delete,data: {turbo_method: :delete,  turbo_confirm: "Are you sure"} , class: 'btn btn-danger' %>
-<%= link_to 'Back', banks_path, class: 'btn btn-secondary'%> </p>
+
 </div>

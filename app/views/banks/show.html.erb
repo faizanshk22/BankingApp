@@ -1,11 +1,12 @@
-<div style="padding: 22px">
-  <h1><%= @bank.bank_name %></h1>
-  <br>
+<div  class="moving-text"  style="padding: 22px">
+<div class="text-center p-3">
+  <h1 class="bordered-div" style="color:blue"><%= @bank.bank_name %></h1> </div>
+  
   <% unless current_user.admin? %>
-    <p><strong>Accounts Details</strong></p><br>
+    <p><strong style="color:black">Accounts Details</strong></p><br>
     <% if @bank.accounts.where(user_id: current_user.id).any? %>
       <% @bank.accounts.where(user_id: current_user.id).each do |account| %>
-        <div>
+        <div style="color: black">
           <p><strong>User:</strong> <%= current_user.first_name %> <%= current_user.last_name %> </p>
           <p><strong>Email:</strong> <%= current_user.email %></p>
           <p><strong>Account Number:</strong> <%= account.account_no %></p>
@@ -13,10 +14,10 @@
         </div>
       <% end %>
     <% else %>
-      <p>No accounts found.</p>
+      <p style="color:black">No accounts found.</p>
     <% end %>
   <% end %>
-  <br><br>
+
   <% if current_user.admin? %>
     <% users = @bank.users %>
     <% if users.any? %>
@@ -25,14 +26,14 @@
           <li> <a href="<%= user_path(user) %>" style="text-decoration: none;"><strong>User:</strong> <%= user.email %> </a></li>
           <% user_accounts = user.accounts.where(bank_id: @bank.id) %>
           <% if user_accounts.any? %>
-            <ul>
+            <ul style="color:black">
               <% user_accounts.each do |account| %>
-                <li>
+                <li >
                   <strong>Account Number:</strong>
-                  <%= account.account_no %>,
-                  <strong>Balance:</strong>
-                  <%= account.balance %>
+                  <%= account.account_no %><br>
                 </li>
+                <li> <strong>Balance:</strong>
+                  <%= account.balance %> </li>
               <% end %>
             </ul>
           <% else %>
@@ -46,5 +47,6 @@
    <p>
     <%= link_to 'Edit this bank', edit_bank_path(@bank), class: 'btn btn-primary' %>
   <% end %>
-  <%= link_to 'Back', banks_path, class: 'btn btn-secondary' %> </p>
+  <%= link_to 'Back', root_path, class: 'btn btn-secondary' %> </p>
+
 </div>
