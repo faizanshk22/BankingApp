@@ -1,7 +1,7 @@
 class Transaction < ApplicationRecord
   belongs_to :account
-
-  
+  belongs_to :sender, class_name: 'User'
+  belongs_to :receiver, class_name: 'User'
 
   validates :account, :transaction_type, :amount, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 0 }

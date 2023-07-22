@@ -5,17 +5,17 @@
       <%= f.number_field :amount, min: 0%>
     </div>
     <br>
-    <div class="field">
-      <%= f.label :transaction_type, "Transaction Type" %>
-      <br>
-      <%= f.select :transaction_type, options_for_select(["Deposit", "Withdraw"]), prompt: "Select Transaction Type" %>
-    </div>
+     <%= f.hidden_field :sender_id, value: current_user.id %>
     <br>
     <div class="field">
-      <%= f.label :account_id, "Select Account" %>
-      <br>
-      <%= f.collection_select :account_id, @accounts, :id, :account_no, prompt: "Choose your Account" %>
+    <%= f.label :bank_id %>
+    <%= f.collection_select :account_id, @accounts, :id, :bank_name, prompt: 'Select Bank' %>
     </div>
+    <br>
+     <div class="field">
+    <%= f.label :receiver_id %>
+    <%= f.collection_select :receiver_id, [], :id, :first_name, prompt: 'Select Receiver' %>
+  </div>
     <br>
     <div class="actions">
       <%= f.submit "Make a Transaction", class: "btn btn-primary" %>

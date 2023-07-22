@@ -10,7 +10,7 @@
           <% if transaction.account.bank %>
             <strong>Bank Name:</strong> <%= transaction.account.bank.bank_name %>
           <% else %>
-            <strong>Bank Name:</strong> N/A
+            <strong>Bank Name:</strong> Not available
           <% end %>
           <br>
           <a href="<%= transaction_path(transaction) %>" style="text-decoration: none;">
@@ -19,7 +19,6 @@
           <br>
           <strong>Amount:</strong> <%= transaction.amount %>
           <br>
-          <strong>Balance:</strong> <%= transaction.account.balance %>
         </li>
         <br>
       <% end %>

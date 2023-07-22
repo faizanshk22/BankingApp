@@ -10,14 +10,15 @@ class TransactionsController < ApplicationController
 
   def new
     @transaction = Transaction.new
-    @accounts = current_user.accounts
+    @accounts = current_user.accounts.approved.includes(:bank)
+    @banks = Bank.all 
+    @sender = current_user
   end
 
   
   def create
     @transaction = Transaction.new(transaction_params)
     @account = Account.find(params[:transaction][:account_id]) 
-  
     if @transaction.valid? && @account.present?
       if @transaction.deposit?
         @account.balance ||= 0
@@ -31,6 +32,7 @@ class TransactionsController < ApplicationController
           @account.balance -= @transaction.amount
         end
       end
+ 
     end
   
     if @transaction.save

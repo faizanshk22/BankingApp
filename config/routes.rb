@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       post :decline_account
     end
   end
-  
+  get '/pending', to: 'admins#pending'
   
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   resources :users do 
     member do
       post :create_account_request
+      get :approve
+      get :decline
     end
   end
 
