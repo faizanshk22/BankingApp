@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_one_attached :header_image
 
   has_many :accounts , dependent: :destroy
+  has_many :transactions
   
  # def approved?
   #  self.approved

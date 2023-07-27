@@ -13,7 +13,6 @@
             <%= link_to "Create new Account", new_account_path, class: "nav-link" %>
             <%= link_to "Make a Transaction", new_transaction_path, class: "nav-link" %>
           <% else %>
-            <%= link_to "Create New Bank", new_bank_path, class: "nav-link" %>
             <%= link_to "Pending Requests", pending_path, class: "nav-link" %>
           <% end %>
         </div>
@@ -27,6 +26,9 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
+            <% if current_user.admin? %>
+            <%= link_to "Create New Bank", new_bank_path, class: "dropdown-item" %>
+            <% end %>
             <% unless current_user.admin?%>
               <%= link_to "Accounts", accounts_path, class: "dropdown-item" %>
               <%= link_to "Transactions", transactions_path, class: "dropdown-item"%>

@@ -19,7 +19,7 @@ class AccountsController < ApplicationController
     @account.user = current_user
     @account.status = :pending
     if @account.save
-      redirect_to account_path(@account), notice: 'Account was successfully created.'
+      redirect_to account_path(@account), notice: 'Account was successfully created. Please wait for account approval'
     else
       render :new, status: :unprocessable_entity 
     end

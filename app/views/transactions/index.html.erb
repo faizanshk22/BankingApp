@@ -14,7 +14,8 @@
           <% end %>
           <br>
           <a href="<%= transaction_path(transaction) %>" style="text-decoration: none;">
-            <strong>Transaction Type:</strong> <%= transaction.transaction_type %>
+            <!-- <strong>Transaction Type:</strong> <%= transaction.transaction_type %> -->
+            <strong> Sender: </strong> <%= transaction.sender_id%>
           </a>
           <br>
           <strong>Amount:</strong> <%= transaction.amount %>

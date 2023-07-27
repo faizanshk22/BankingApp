@@ -11,6 +11,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    if current_user.admin? && params[:id].to_i != current_user.id
+    else
+      @user = current_user
+    end
     rescue ActiveRecord::RecordNotFound
     redirect_to user_path(current_user), alert: "User not found"
   end

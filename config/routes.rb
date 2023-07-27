@@ -20,10 +20,11 @@ Rails.application.routes.draw do
 
   resources :banks 
   resources :accounts 
-  resources :transactions
+  resources :transactions 
 
   root to: 'users#index'
-  
+  get '/get_users_by_bank', to: 'transactions#get_users_by_bank'
+
 
   resources :users do 
     member do

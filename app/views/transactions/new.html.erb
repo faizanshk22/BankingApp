@@ -7,3 +7,32 @@
 
 
 </div>
+
+<script>
+    $("#transaction_bank_id").click(function() {
+
+      const receiverSelect = $('#transaction_receiver_id');
+      const selectedBankId = $(this).val();
+      $.ajax({
+        url: '/get_users_by_bank',
+        data: { bank_id: selectedBankId },
+        dataType: 'json',
+        success: function(data) {
+          receiverSelect.empty();
+          receiverSelect.append($('<option>').val('').text('Select Receiver'));
+
+          data.forEach(function(account) {
+            const accountId = account[0];
+            const accountNo = account[1];
+            const optionText = `(${accountNo})`;
+            const option = $('<option>').val(accountId).text(optionText);
+            receiverSelect.append(option);
+          });
+        },
+        error: function() {
+          receiverSelect.empty();
+          receiverSelect.append($('<option>').val('').text('Select Receiver'));
+        }
+      });
+    });
+</script>
