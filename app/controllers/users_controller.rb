@@ -7,6 +7,8 @@ class UsersController < ApplicationController
       @user = current_user
       @banks = Bank.joins(:accounts).where(accounts: { user_id: @user.id, status: 1 }).distinct
       @account_count = @user.accounts.where(status: 1).count
+      @accounts = @user.accounts.where(status: 1)
+
     end
   end
 

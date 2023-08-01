@@ -1,10 +1,11 @@
 <div class="moving-text" style="padding: 22px">
 <h2><strong class="bordered-div" style='color:black'> Users waiting for Approval </strong></h2>
 <br>
-  <% @users.where(approved: false).each do |user| %>
+  <% @users.where(approved: false).reverse.each do |user| %>
     <div>
-     <p> <strong> <%= user.email %> </strong></p>
-    <p><%= user.first_name %> <%= user.last_name%></p> 
+    <br>
+     <p> <strong> <%= user.email %> </strong>
+   <%= user.first_name %> <%= user.last_name%></p> 
 
     <%= link_to 'Approve', approve_user_path(user), method: :patch, class: 'btn btn-success'%>
       <%= link_to 'Decline', decline_user_path(user), method: :patch, class: 'btn btn-danger' %>

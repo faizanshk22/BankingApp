@@ -1,9 +1,10 @@
 <div>
+<% if @accounts.approved.any? %>
   <%= form_for @transaction do |f| %>
-   
+    
      <div class="field">
     <%= f.label :sender_id, "Sender Account" %>
-    <%= f.collection_select :sender_id,  @accounts, :id, :account_no, prompt: 'Select Account'%>
+    <%= f.collection_select :account_id,  @accounts, :id, :account_no, prompt: 'Select Account'%>
     </div> 
     <br>
     <div class="field">
@@ -13,7 +14,7 @@
     <br>
     
    <div class="field">
-      <%= f.label :receiver_id %>
+      <%= f.label :receiver_id, "Receiver Account" %>
       <%= f.collection_select :receiver_id, [], :id, :account_no, prompt: 'Select Receiver', id: 'transaction_receiver_id' %>
     </div>
 <br>
@@ -28,38 +29,9 @@
       <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
+    
+  <% else %>
+    <p>No accounts for the transactions.</p>
+  <% end %>
 </div>
 
-<%# <script>
-  $(document).on('turbolinks:load', function() {
-    const receiverSelect = $('#transaction_receiver_id');
-    const bankSelect = $('select.bank-select');
-
-    bankSelect.on('change', fsunction() {
-      const selectedBankId = $(this).val();
-
-      $.ajax({
-        url: '/get_users_by_bank',
-        data: { bank_id: selectedBankId },
-        dataType: 'json',
-        success: function(data) {
-          receiverSelect.empty();
-          receiverSelect.append($('<option>').val('').text('Select Receiver'));
-
-          data.forEach(function(user) {
-            const userId = user[0];
-            const userName = user[1];
-            const accountNo = user[2];
-            const optionText = `${userName} (${accountNo})`;
-            const option = $('<option>').val(userId).text(optionText);
-            receiverSelect.append(option);
-          });
-        },
-        error: function() {
-          receiverSelect.empty();
-          receiverSelect.append($('<option>').val('').text('Select Receiver'));
-        }
-      });
-    });
-  });
-</script> %>

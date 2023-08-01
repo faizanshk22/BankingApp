@@ -1,6 +1,6 @@
 <div class="moving-text" style="padding: 22px">
 <div class="text-center p-3"> 
-  <h1 class="bordered-div" style="color: blue"><strong>Welcome to Admin Dashboard </strong></h1> </div>
+  <h1 class="bordered-div" style="color: black"><strong>Welcome to Admin Dashboard </strong></h1> </div>
   <br>
   <div style="color:black">
     <h2><strong class="bordered-div">Users Available</strong></h2>
@@ -11,9 +11,9 @@
            <h3> <strong style="color:blue"><%= user.first_name %> <%= user.last_name%></strong></h3> 
           </a>
           <p> <strong><%= user.email %></strong></p>
-          <% if user.pending_accounts.any? %> <br>
-            <div class="account-approval">
-              <% user.pending_accounts.each do |account| %>
+          <% if user.pending_accounts.any? %> 
+            <div>
+              <% user.pending_accounts.reverse.each do |account| %>
                 <p><strong>Account Request:</strong> <%= account.bank.bank_name %></p> 
                 <%= form_with url: approve_account_admin_path(account), method: :post do |f| %>
                   <%= f.submit 'Approve', class: 'btn btn-success' %>

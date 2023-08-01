@@ -1,6 +1,6 @@
 <div class="moving-text" style="padding: 22px">
   <div class="text-center p-3">
-  <h1 class="bordered-div" style="color: blue">User Details</h1> </div>
+  <h1 class="bordered-div" style="color: black">User Details</h1> </div>
 
   <div style="color:black">
     <p><strong>First Name:</strong> <%= @user.first_name %></p>
@@ -22,7 +22,7 @@
       <h2><strong>Accounts</strong></h2>
       <ul>
         <% @user.accounts.each do |account| %>
-        <a href="<%= account_path(account) %>" style="text-decoration: none;">
+        <a href="<%= account_path(account) %>" style="text-decoration: none; color:blue">
           <li><strong><%= "#{account.bank.bank_name} Account" %></strong></li><br>
           </a>
        

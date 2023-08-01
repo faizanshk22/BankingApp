@@ -25,6 +25,8 @@ class BanksController < ApplicationController
     end
   end
   def edit
+  rescue ActiveRecord::RecordNotFound
+    redirect_to banks_path, alert: "Bank not found"
   end
   def update
     if @bank.update(bank_params)

@@ -1,20 +1,49 @@
 <div class="moving-text" style="padding: 22px">
-<div class="text-center p-3"> 
+  <div class="text-center p-3"> 
+    <h1 class="bordered-div" style="color: black">Account Details</h1>
+  </div>
+  <br>
+  <div style="color: black">
+    <p><strong>Account Number: </strong><%= @account.account_no %></p>
+    <p><strong>Balance: </strong><%= @account.balance %></p>
+    <p><strong>Status: </strong><%= @account.status.capitalize %></p>
+  </div>
 
-<h1 class="bordered-div" style="color: blue">Account Details</h1> </div>
-<br>
-<div style="color:black">
-<p><strong>Account Number: </strong> <%= @account.account_no %></p>
-<p><strong>Balance: </strong> <%= @account.balance %></p>
-<p><strong>Status: </strong> <%= @account.status.capitalize %></p>
-</div>
- <% if current_user&.admin? && @account.pending? %>
+  <% if current_user&.admin? && @account.pending? %>
     <%= link_to 'Approve Account', approve_account_admin_path(@account), method: :post, class: 'btn btn-primary' %>
   <% end %>
-  <p>
- <% if current_user.admin? %>
-<%= link_to 'Edit', edit_account_path(@account), class: 'btn btn-primary' %>
-<% end %>
 
-  <%= link_to 'Back', root_path, class: 'btn btn-secondary' %> </p>
+  <% if current_user.admin? %>
+    <%= link_to 'Edit', edit_account_path(@account), class: 'btn btn-primary' %>
+  <% end %>
+
+  <%= link_to 'Back', root_path, class: 'btn btn-secondary' %> 
+</div>
+
+<div class="moving-text" style="padding: 22px">
+  <div class="text-center p-3"> 
+    <h1 class="bordered-div" style="color: black">Transaction Records</h1>
+  </div>
+  <% if @account.transactions.present? %>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr style="background-color: #f0ad4e; color: white;">
+          <th>Amount</th>
+          <th>Receiver Account</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @account.transactions.each do |transaction| %>
+          <tr style="color:black;">
+            <td><%= transaction.amount %></td>
+            <td><%= transaction.receiver_id.present? ? Account.find_by(id: transaction.receiver_id)&.account_no : 'Not Available' %></td>
+            <td><%= transaction.created_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p style='color:black'>No transaction records found.</p>
+  <% end %>
 </div>
