@@ -1,0 +1,22 @@
+<div style="padding: 22px">
+  <h1>Your Accounts</h1>
+  <% if @accounts.any? %>
+    <% @accounts.each do |account| %>
+      <br>
+      <li>
+        <strong>Bank Name:</strong> <%= account.bank.bank_name %>
+        <br> 
+        <a href="<%= account_path(account) %>">
+          <strong>Account Number:  </strong> <%= account.account_no %>
+        </a>
+        <br>
+        <strong>Status:</strong> <%= account.status.capitalize %>
+      
+      </li>
+      <br>
+    <% end %>
+  <% else %>
+    <p>No accounts found.</p>
+  <% end %>
+  <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+</div>

@@ -1,0 +1,30 @@
+<%= form_for @user, url: user_path(@user), method: :patch, html: { multipart: true } do |f| %>
+   <div style="padding: 13px;">
+   <div class="field">
+    <%= f.label :first_name %> <br>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %> <br>
+    <%= f.text_field :last_name %>
+  </div>
+   <br>
+  <div class="field">
+    <%= f.label :date_of_birth %>
+    <%= f.date_field :date_of_birth %>
+  </div><br>
+  <div class="field">
+    <%= f.label :phone %> 
+    <%= f.text_field :phone %>
+  </div><br>
+  <div class="field">
+    <%= f.label :gender %>
+    <%= f.select :gender, ["Male", "Female", "Other"] %>
+  </div>
+  
+  <br>
+  <%= f.submit "Update", class: "btn btn-primary" %> 
+   <%= link_to "Back", root_path, class: "btn btn-secondary" %>
+  </div>
+  <% end %>

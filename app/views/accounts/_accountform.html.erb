@@ -1,0 +1,14 @@
+<div style="padding: 22px">
+  <%= form_for @account do |f| %>
+  
+
+    <div class="field">
+      <%= f.label :bank_id, "Select Bank" %>
+      <%= f.collection_select :bank_id, Bank.all, :id, :bank_name, prompt: "Select a Bank" %>
+    </div>
+<br>
+    <div class="actions">
+      <%= f.submit "Create Account", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

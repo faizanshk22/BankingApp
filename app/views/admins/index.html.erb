@@ -1,0 +1,31 @@
+<div style="padding: 22px">
+  <h1>Admin Dashboard</h1>
+  <br>
+  <div>
+    <h2>Users Available</h2>
+    <div class="alert alert-info" role="alert">
+      <% @users.each do |user| %>
+        <% unless user.admin? %>
+          <a href="<%= user_path(user) %>">  <br>
+            <strong><%= user.first_name %> <%= user.last_name%></strong> <br>
+          </a>
+          <p><%= user.email %></p>
+          <% if user.pending_accounts.any? %>
+            <div class="account-approval">
+              <% user.pending_accounts.each do |account| %>
+                <p>Account Request: <%= account.bank.bank_name %></p> 
+                <%= form_with url: approve_account_admin_path(account), method: :post do |f| %>
+                  <%= f.submit 'Approve', class: 'btn btn-success' %>
+                <% end %>
+                <br>
+                <%= form_with url: decline_account_admin_path(account), method: :post do |f| %>
+                  <%= f.submit 'Decline', class: 'btn btn-danger' %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

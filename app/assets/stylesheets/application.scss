@@ -1,0 +1,38 @@
+@import "bootstrap";
+@keyframes slideIn {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .landing-page {
+    padding: 20px;
+    background-color: #f1f1f1;
+  }
+  
+  .moving-text {
+    animation: slideIn 1s ease-in-out;
+    padding: 10px;
+    color: #333;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+  }
+  
+  

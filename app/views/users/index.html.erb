@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <% if user_signed_in? %>
+    <div style="padding: 22px">
+      <div class="mb-3">
+        <p class="text-muted mb-0"><strong>Logged in as</strong> <%= current_user.email %></p>
+        <div>
+          <a href="<%= user_path(current_user) %>" class="user-link" style="color: #333;">
+            <p class="moving-text mt-2 mb-0">
+              <strong><%= current_user.first_name %> <%= current_user.last_name %></strong>
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div style="padding: 22px;"class="alert alert-info" role="alert">
+    <% if user_signed_in? %>
+      <h1>Welcome to Banking App (All banks in one app)</h1>
+      <br>
+       <p><strong>Number of Accounts:</strong> <%= @account_count %></p>
+       <% if @banks.present? %>
+    <div>
+      <p><strong>Bank Names:</strong></p>
+      <ul>
+        <% @banks.each do |bank| %>
+          <li><%= bank.bank_name %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <p>No accounts found.</p>
+  <% end %>
+    <% else %>
+      <h1 class="moving-text">Welcome to Banking App (All banks in one app)</h1>
+      <p class="moving-text">
+        Manage your finances with ease.
+        In this rapidly evolving digital era, the world of banking has undergone a profound transformation. Gone are the days of long queues, complex paperwork, and limited accessibility.
+        With the advent of innovative technologies, banking has become more streamlined, efficient, and customer-centric.
+        One such groundbreaking innovation is the ultimate banking app, a game-changer in the financial industry.
+        This blog aims to explore the features and benefits of this revolutionary banking app, highlighting how it facilitates users and enhances their banking experience.
+        The ultimate banking app represents a significant leap forward in the world of banking, revolutionizing how users interact with their finances. With its seamless account management, secure transactions, personalized insights, exceptional customer support, robust security features, and integration with third-party services, this app is a game-changer in the industry. By placing the power of banking in users' hands, it empowers individuals to take control of their financial well-being and achieve their financial goals. As we embrace the digital future, the ultimate banking app stands at the forefront, redefining banking convenience and setting new standards for customer-centric financial services.
+      </p>
+      <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+      <%= link_to "Log In", new_user_session_path, class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+</div>

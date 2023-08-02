@@ -1,0 +1,26 @@
+<div style="padding: 22px">
+  <h1>User Details</h1>
+
+  <div>
+    <p><strong>First Name:</strong> <%= @user.first_name %></p>
+    <p><strong>Last Name:</strong> <%= @user.last_name %></p>
+    <p><strong>Email:</strong> <%= @user.email %></p>
+    <p><strong>Gender:</strong> <%= @user.gender %></p>
+    <p><strong>DOB:</strong> <%= @user.date_of_birth %></p>
+    <p><strong>Phone:</strong> <%= @user.phone %></p>
+  </div>
+
+  <% if current_user.admin? && @user != current_user %>
+    <% if @user.accounts.any? %>
+      <h2>Accounts</h2>
+      <ul>
+        <% @user.accounts.each do |account| %>
+          <li><%= link_to "#{account.bank.bank_name} Account", account_path(account) %></li>
+          <br>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+  <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-primary" %> <br> <br>
+  <%= link_to "Back", current_user.admin? ? admins_index_path : root_path, class: "btn btn-secondary" %>
+</div>

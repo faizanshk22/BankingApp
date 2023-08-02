@@ -1,0 +1,16 @@
+<div style="padding: 22px">
+<div class="alert alert-info" role="alert">
+  <h1>Welcome to KoksalBanking App (All banks in one app)</h1>
+  <p> Manage your finances with ease </p>
+  <% @banks.each do |bank| %>
+  <br>
+    <h2><%=link_to bank.bank_name, bank_path(bank) %></h2>
+
+ 
+<% end %>
+</div>
+</div>
+
+
+
+

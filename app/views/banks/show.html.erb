@@ -1,0 +1,50 @@
+<div style="padding: 22px">
+  <h1><%= @bank.bank_name %></h1>
+  <br>
+  <% unless current_user.admin? %>
+    <p><strong>Accounts Details</strong></p><br>
+    <% if @bank.accounts.where(user_id: current_user.id).any? %>
+      <% @bank.accounts.where(user_id: current_user.id).each do |account| %>
+        <div>
+          <p><strong>User:</strong> <%= current_user.first_name %> <%= current_user.last_name %> </p>
+          <p><strong>Email:</strong> <%= current_user.email %></p>
+          <p><strong>Account Number:</strong> <%= account.account_no %></p>
+          <p><strong>Balance:</strong> <%= account.balance %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No accounts found.</p>
+    <% end %>
+  <% end %>
+  <br><br>
+  <% if current_user.admin? %>
+    <% users = @bank.users %>
+    <% if users.any? %>
+      <ul>
+        <% users.each do |user| %>
+          <li> <a href="<%= user_path(user) %>"><strong>User:</strong> <%= user.email %> </a></li>
+          <% user_accounts = user.accounts.where(bank_id: @bank.id) %>
+          <% if user_accounts.any? %>
+            <ul>
+              <% user_accounts.each do |account| %>
+                <li>
+                  <strong>Account Number:</strong>
+                  <%= account.account_no %>,
+                  <strong>Balance:</strong>
+                  <%= account.balance %>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <li>No accounts found for this user.</li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No users found for this bank.</p>
+    <% end %>
+    <%= link_to 'Edit this bank', edit_bank_path(@bank), class: 'btn btn-primary' %>
+  <% end %>
+  <br><br>
+  <%= link_to 'Back', banks_path, class: 'btn btn-secondary' %>
+</div>
