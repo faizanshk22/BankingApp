@@ -1,6 +1,24 @@
 <div class="container-fluid">
   <div class="moving-text" style="padding: 22px; color: black;">
     <% if user_signed_in? %>
+    
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">User Welcome</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Welcome to Online Banking App
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
       <div class="text-center p-3">
         <h1 class="bordered-div" style="color: black;">Welcome to Banking App (All banks in one app)</h1>
       </div>
@@ -29,6 +47,7 @@
             </tbody>
           </table>
         </div>
+       
       <% else %>
         <p style="color: black;">No accounts found.</p>
       <% end %>
