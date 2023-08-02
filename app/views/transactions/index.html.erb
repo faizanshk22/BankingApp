@@ -1,20 +1,20 @@
 <div class="moving-text" style='padding: 22px; color: black'>
   <div class="text-center p-3">
-    <h1 class="bordered-div" style="color: blue">Transaction History</h1> </div>
+    <h1 class="bordered-div" style="color: black">Transaction History</h1> </div>
     <% if @transactions.any? %>
-      <% @transactions.each do |transaction| %>
+      <% @transactions.reverse.each do |transaction| %>
         <br>
         <li>
           <strong>Account Number:</strong> <%= transaction.account.account_no %>
           <br> 
           <% if transaction.account.bank %>
-            <strong>Bank Name:</strong> <%= transaction.account.bank.bank_name %>
+            <strong>Sender Bank Name:</strong> <%= transaction.account.bank.bank_name %>
           <% else %>
             <strong>Bank Name:</strong> Not available
           <% end %>
           <br>
-          <a href="<%= transaction_path(transaction) %>" style="text-decoration: none;">
-            <strong>Transaction Type:</strong> <%= transaction.transaction_type %>
+          <a href="<%= transaction_path(transaction) %>" style="text-decoration: none;color:blue">
+            <strong> Receiver Account Id: </strong> <%= transaction.receiver_id%>
           </a>
           <br>
           <strong>Amount:</strong> <%= transaction.amount %>

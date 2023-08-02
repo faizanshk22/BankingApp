@@ -7,10 +7,16 @@ class UsersController < ApplicationController
       @user = current_user
       @banks = Bank.joins(:accounts).where(accounts: { user_id: @user.id, status: 1 }).distinct
       @account_count = @user.accounts.where(status: 1).count
+      @accounts = @user.accounts.where(status: 1)
+
     end
   end
 
   def show
+    if current_user.admin? && params[:id].to_i != current_user.id
+    else
+      @user = current_user
+    end
     rescue ActiveRecord::RecordNotFound
     redirect_to user_path(current_user), alert: "User not found"
   end

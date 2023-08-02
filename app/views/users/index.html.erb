@@ -1,31 +1,42 @@
 <div class="container-fluid">
-  <div class="moving-text" style="padding: 22px; color:black">
+  <div class="moving-text" style="padding: 22px; color: black;">
     <% if user_signed_in? %>
-    <div class="text-center p-3">
-      <h1 class="bordered-div" style="color:blue">Welcome to Banking App (All banks in one app)</h1> </div>
+      <div class="text-center p-3">
+        <h1 class="bordered-div" style="color: black;">Welcome to Banking App (All banks in one app)</h1>
+      </div>
       <br>
-       <h1><strong>Number of Accounts:</strong> <%= @account_count %></h1><br>
-       <% if @banks.present? %>
-    <div>
-      <h1><strong>Your Accounts based in these Banks :</strong></h1>
-      <ul>
-        <% @banks.each do |bank| %>
-          <li><h3> 
-          <a href="<%= bank_path(bank) %>"style="text-decoration:none; color:blue">
-          <%= bank.bank_name %>
-          </a>
-           </h3></li>
-        <% end %>
-      </ul>
-    </div>
-    </div>
-  <% else %>
-    <p>No accounts found.</p>
-  <% end %>
+      <h1><strong>Number of Accounts:</strong> <%= @account_count %></h1>
+      <br>
+      <% if @accounts.present? %>
+        <div>
+          <h1><strong>Your Account Details:</strong></h1>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr style="background-color: #f0ad4e; color: white;">
+                <th>Bank</th>
+                <th>Account Number</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @accounts.each do |account| %>
+                <tr style="color: black;">
+                  <td><%= account.bank.bank_name %></td>
+                  <td><%= account.account_no %></td>
+                  <td class="balance-cell"><strong><%= account.balance %></strong></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <p style="color: black;">No accounts found.</p>
+      <% end %>
     <% else %>
       <div class="bordered-div" >
       <h1 class="moving-text" style="color: black">Welcome to Banking App (All banks in one app)</h1>
       <p class="moving-text" style="color: black">
+      <strong>
         Manage your finances with ease.
         In this rapidly evolving digital era, the world of banking has undergone a profound transformation. Gone are the days of long queues, 
         complex paperwork, and limited accessibility.
@@ -40,9 +51,28 @@
         this app is a game-changer in the industry. By placing the power of banking in users' 
         hands, it empowers individuals to take control of their financial well-being and achieve 
         their financial goals. As we embrace the digital future, the ultimate banking app stands at the forefront, 
-        redefining banking convenience and setting new standards for customer-centric financial services.<br>
+        redefining banking convenience and setting new standards for customer-centric financial services.</strong><br>
         </p> <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
       <%= link_to "Log In", new_user_session_path, class: "btn btn-secondary" %></div>
-      
+      <div>
+      <br><br><br>
+    
+      <h1> Contact us:</h1>
+      <p>Phone: <strong>(042) 35312424 </strong> </p>
+      <p>Cell: <strong> +92 3244282516 </strong> </p>
+      <p>Email: <strong> faizanshk20@ucp.edu.pk </strong> </p>
+      </div>
+      <div>
+      <%= link_to 'https://www.facebook.com/faizansh1may', target: :_blank, style:'text-decoration:none;' do %>
+      <%= image_tag 'fb.png', alt: "fblogo" %> <% end %>
+       <%= link_to 'https://www.instagram.com/faizan__sheikh__', target: :_blank, style:'text-decoration:none;' do %>
+       <%= image_tag 'Ig.png', alt: "Iglogo" %>  <% end %>
+      <%= link_to 'https://www.linkedin.com/in/faizansheikh5', target: :_blank, style:'text-decoration:none;' do %>
+        <%= image_tag 'Ld.png', alt: "Ldlogo" %> <% end %>
+       <%= link_to 'https://twitter.com/faizanshk20', target: :_blank do %>
+       <%= image_tag 'twitter.png', alt: "Twitter" %> </a> <% end %>
+      </div>
     <% end %>
+<br> <br> <br>
 </div>
+

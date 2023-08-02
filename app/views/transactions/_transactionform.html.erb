@@ -1,26 +1,37 @@
-<div >
+<div>
+<% if @accounts.approved.any? %>
   <%= form_for @transaction do |f| %>
-    <div class="field">
-      <%= f.label :amount %>
-      <%= f.number_field :amount, min: 0%>
-    </div>
-    <br>
-     <%= f.hidden_field :sender_id, value: current_user.id %>
-    <br>
-    <div class="field">
-    <%= f.label :bank_id %>
-    <%= f.collection_select :account_id, @accounts, :id, :bank_name, prompt: 'Select Bank' %>
-    </div>
-    <br>
+    
      <div class="field">
-    <%= f.label :receiver_id %>
-    <%= f.collection_select :receiver_id, [], :id, :first_name, prompt: 'Select Receiver' %>
-  </div>
+    <%= f.label :sender_id, "Sender Account" %>
+    <%= f.collection_select :account_id,  @accounts, :id, :account_no, prompt: 'Select Account'%>
+    </div> 
+    <br>
+    <div class="field">
+      <%= f.label :bank_id %>
+      <%= f.collection_select :bank_id, @banks, :id, :bank_name, prompt: 'Select Bank', id: 'bank-select' %>
+    </div>
+    <br>
+    
+   <div class="field">
+      <%= f.label :receiver_id, "Receiver Account" %>
+      <%= f.collection_select :receiver_id, [], :id, :account_no, prompt: 'Select Receiver', id: 'transaction_receiver_id' %>
+    </div>
+<br>
+     
+     <div class="field">
+      <%= f.label :amount %>
+      <%= f.number_field :amount, min: 0 %>
+    </div>
     <br>
     <div class="actions">
       <%= f.submit "Make a Transaction", class: "btn btn-primary" %>
-<%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
-
+      <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
+    
+  <% else %>
+    <p>No accounts for the transactions.</p>
+  <% end %>
 </div>
+

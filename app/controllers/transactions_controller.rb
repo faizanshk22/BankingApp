@@ -1,8 +1,12 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:show]
-
+  before_action :set_transaction, only: [:show, :access_denied_to_user]
+  before_action :access_denied_to_admin, only: [:index, :new]
+  before_action :access_denied_to_user, only: [:show]
+  
   def index
-    @transactions = Transaction.joins(:account).where(accounts: { user_id: current_user.id })
+    sender_transactions = Transaction.joins(account: :user).where(users: { id: current_user.id })
+    receiver_transactions = Transaction.where(receiver_id: current_user.accounts.pluck(:id))
+    @transactions = sender_transactions.to_a.concat(receiver_transactions.to_a)
   end
 
   def show
@@ -10,40 +14,43 @@ class TransactionsController < ApplicationController
 
   def new
     @transaction = Transaction.new
-    @accounts = current_user.accounts.approved.includes(:bank)
-    @banks = Bank.all 
+    @banks = Bank.distinct
     @sender = current_user
+    @receivers = []
+    @accounts = @sender.accounts.approved
   end
 
   
   def create
+    @sender_account = Account.find(params[:transaction][:account_id])
+    @receiver_account = Account.find(params[:transaction][:receiver_id])
     @transaction = Transaction.new(transaction_params)
-    @account = Account.find(params[:transaction][:account_id]) 
-    if @transaction.valid? && @account.present?
-      if @transaction.deposit?
-        @account.balance ||= 0
-        @account.balance += @transaction.amount
-      elsif @transaction.withdrawal?
-        if @account.balance.nil? || @transaction.amount > @account.balance
-          flash.now[:alert] = 'Insufficient balance for withdrawal.'
-          render :new, status: :unprocessable_entity
-          return
-        else
-          @account.balance -= @transaction.amount
-        end
+    if @transaction.valid?
+      if @sender_account.balance.nil? || @transaction.amount > @sender_account.balance
+        redirect_to (new_transaction_path), notice: 'Insufficient balance for the transaction.'
+        return
       end
- 
-    end
-  
-    if @transaction.save
-      @account.save
+      @sender_account.balance -= @transaction.amount
+      @receiver_account.balance ||= 0
+      @receiver_account.balance += @transaction.amount
+      ActiveRecord::Base.transaction do
+        @transaction.save!
+        @sender_account.save!
+        @receiver_account.save!
+      end
       redirect_to @transaction, notice: 'Transaction was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
   end
+ 
   
-  
+  def get_users_by_bank
+    bank = Bank.find(params[:bank_id])
+    @accounts = bank.accounts.excluding(current_user.accounts).approved
+    accounts_data = @accounts.pluck(:id, :account_no)
+    render json: accounts_data
+  end
   
   def set_transaction
     @transaction = Transaction.find(params[:id])
@@ -52,7 +59,19 @@ class TransactionsController < ApplicationController
 
 
   private
+  def access_denied_to_user
+    if current_user.admin? || current_user.accounts.exists?(id: @transaction.account_id) || current_user.accounts.exists?(id: @transaction.receiver_id)
+    else
+      redirect_to root_path, notice: 'Access denied. You can only view your own transactions.'
+    end
+  end
+
+  def access_denied_to_admin
+    if current_user.admin?
+      redirect_to root_path
+    end
+  end  
   def transaction_params
-  params.require(:transaction).permit(:transaction_type, :amount, :account_id)
+  params.require(:transaction).permit( :amount, :bank_id, :account_id,  :receiver_id)
   end
 end

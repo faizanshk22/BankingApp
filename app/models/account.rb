@@ -7,9 +7,7 @@ class Account < ApplicationRecord
   { pending: 0,
      approved: 1, 
       declined: 2 }
-      def bank_name
-        bank.bank_name
-      end
+    
   
   validates :status, presence: true
   validates :account_no, uniqueness: { scope: :bank_id }, allow_blank: true
@@ -20,7 +18,7 @@ class Account < ApplicationRecord
 private
 
 def generate_account_number
-  self.account_no ||= "#{bank.bank_name[0..3].upcase}-#{SecureRandom.hex(6)}"
+  self.account_no ||= "#{user.first_name[0..6].upcase}-#{SecureRandom.hex(6)}"
 end
 
   

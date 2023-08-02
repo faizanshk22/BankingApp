@@ -1,9 +1,9 @@
 <div  class="moving-text"  style="padding: 22px">
 <div class="text-center p-3">
-  <h1 class="bordered-div" style="color:blue"><%= @bank.bank_name %></h1> </div>
+  <h1 class="bordered-div" style="color:black"><%= @bank.bank_name %></h1> </div>
   
   <% unless current_user.admin? %>
-    <p><strong style="color:black">Accounts Details</strong></p><br>
+    <h3><strong style="color:black">Accounts Details</strong></h3>
     <% if @bank.accounts.where(user_id: current_user.id).any? %>
       <% @bank.accounts.where(user_id: current_user.id).each do |account| %>
         <div style="color: black">
@@ -23,7 +23,7 @@
     <% if users.any? %>
       <ul>
         <% users.each do |user| %>
-          <li> <a href="<%= user_path(user) %>" style="text-decoration: none;"><strong>User:</strong> <%= user.email %> </a></li>
+          <li> <a href="<%= user_path(user) %>" style="text-decoration: none;color:blue"><strong>User:</strong> <%= user.email %> </a></li>
           <% user_accounts = user.accounts.where(bank_id: @bank.id) %>
           <% if user_accounts.any? %>
             <ul style="color:black">

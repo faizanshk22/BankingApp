@@ -1,14 +1,18 @@
 <div class="moving-text" style="padding: 22px">
 <div class="text-center p-3"> 
-  <h1 class="bordered-div" style="color: blue">List of all Banks</h1> </div>
-  <% @banks.each do |bank| %>
-  <br>
-  <a href="<%= bank_path(bank) %>" style=" text-decoration: none; color:blue">
-    <h3 style="padding: 5px"><strong><%= bank.bank_name  %></strong></h3>
-
-
-<% end %>
-  <%= link_to 'Back', root_path, class: 'btn btn-secondary' %> </p>
+  <h1 class="bordered-div" style="color: black">List of all Banks</h1> </div>
+  <div>
+      <ul>
+        <% @banks.each do |bank| %>
+          <li><h3> 
+          <a href="<%= bank_path(bank) %>"style="text-decoration:none; color:blue">
+          <%= bank.bank_name %>
+          </a>
+           </h3></li>
+        <% end %>
+      </ul>
+     <%= link_to 'Back', root_path, class: 'btn btn-secondary' %> </p>
+    </div>
 
 </div>
 
