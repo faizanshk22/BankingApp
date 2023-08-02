@@ -12,6 +12,11 @@ class User < ApplicationRecord
   has_one_attached :header_image
 
   has_many :accounts , dependent: :destroy
-
-                             
+  
+ # def approved?
+  #  self.approved
+ # end
+ def active_for_authentication?
+       super && self.approved?
+end                           
 end

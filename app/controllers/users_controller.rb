@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :to_find_the_user, only: [:show, :edit, :destroy, :create_account_request]
-
+  
 
   def index
     if user_signed_in?
@@ -21,9 +21,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    # @user.approved = false
     if @user.save
-      redirect_to root_path, notice: 'User created successfully.' #Waiting for admin approval.'
+      redirect_to root_path, notice: 'User created successfully.' 
     else
       render :new
     end
@@ -51,7 +50,7 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: 'User was successfully deleted.'
   end
   def create_account_request
-    @bank = Bank.find(params[:bank_id])
+    @bank = Bank.find(params[:id])
     @account = @bank.accounts.build(user: @user, status: :pending)
 
     if @account.save
@@ -62,6 +61,21 @@ class UsersController < ApplicationController
   end
   def to_find_the_user
     @user = User.find(params[:id])
+  end
+  def approve
+  @user = User.find(params[:id])
+  @user.update(approved: true)
+
+  redirect_to admins_index_path, notice: 'User approved successfully.'
+  end
+
+  def decline
+  @user = User.find(params[:id])
+  @user.destroy
+  redirect_to admins_index_path, notice: 'User declined successfully.'
+  end
+  def active_for_authentication?
+  super && (approved? || admin?)
   end
   private
 

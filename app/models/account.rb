@@ -7,7 +7,9 @@ class Account < ApplicationRecord
   { pending: 0,
      approved: 1, 
       declined: 2 }
-  
+      def bank_name
+        bank.bank_name
+      end
   
   validates :status, presence: true
   validates :account_no, uniqueness: { scope: :bank_id }, allow_blank: true
