@@ -18,7 +18,7 @@ class Account < ApplicationRecord
 private
 
 def generate_account_number
-  self.account_no ||= SecureRandom.hex(6)
+  self.account_no ||= "#{bank.bank_name[0..3].upcase}-#{SecureRandom.hex(6)}"
 end
 
   

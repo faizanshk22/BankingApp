@@ -1,12 +1,14 @@
-<div style="padding: 22px">
-  <h1>Your Accounts</h1>
+<div  class="moving-text"  style="padding: 22px; color: black"">
+<div class="text-center p-3">
+
+  <h1 class="bordered-div" style="color:blue">Your Accounts</h1> </div>
   <% if @accounts.any? %>
     <% @accounts.each do |account| %>
       <br>
       <li>
         <strong>Bank Name:</strong> <%= account.bank.bank_name %>
         <br> 
-        <a href="<%= account_path(account) %>">
+        <a href="<%= account_path(account) %>" style="text-decoration: none;">
           <strong>Account Number:  </strong> <%= account.account_no %>
         </a>
         <br>
@@ -19,4 +21,5 @@
     <p>No accounts found.</p>
   <% end %>
   <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+  <br><br>
 </div>

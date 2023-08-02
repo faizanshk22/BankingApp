@@ -1,14 +1,17 @@
-<div style="padding: 22px">
+<div style="color:black">
   <%= form_for @account do |f| %>
   
 
     <div class="field">
       <%= f.label :bank_id, "Select Bank" %>
-      <%= f.collection_select :bank_id, Bank.all, :id, :bank_name, prompt: "Select a Bank" %>
+      <%= f.collection_select :bank_id,  Bank.where.not(id: current_user.accounts.pluck(:bank_id)), :id, :bank_name, prompt: "Choose a Bank" %>
     </div>
 <br>
     <div class="actions">
       <%= f.submit "Create Account", class: "btn btn-primary" %>
+<%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+
     </div>
   <% end %>
-</div>
+  </div>
+

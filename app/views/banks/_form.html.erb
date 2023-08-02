@@ -10,13 +10,15 @@
       </ul>
     </div>
   <% end %>
-
+<div style="color:black">
   <div class="field">
     <%= form.label :bank_name %>
     <%= form.text_field :bank_name %>
-  </div>
+  </div> </div>
   <br>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit  "Create Account", class: "btn btn-primary"%>
+    <%= link_to 'Back', banks_path, class: 'btn btn-secondary'%>
   </div>
 <% end %>
+
