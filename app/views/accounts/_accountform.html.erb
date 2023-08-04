@@ -1,17 +1,14 @@
 <div style="color:black">
-  <%= form_for @account do |f| %>
-  
-
-    <div class="field">
-      <%= f.label :bank_id, "Select Bank" %>
-      <%= f.collection_select :bank_id,  Bank.where.not(id: current_user.accounts.pluck(:bank_id)), :id, :bank_name, prompt: "Choose a Bank" %>
+  <%= form_with model: [@account] do |f| %>
+    <div class="modal-body">
+      <div class="field">
+        <%= f.label :bank_id, "Select Bank" %>
+        <%= f.collection_select :bank_id,  Bank.where.not(id: current_user.accounts.pluck(:bank_id)), :id, :bank_name, prompt: "Choose a Bank" %>
+      </div>
     </div>
-<br>
-    <div class="actions">
-      <%= f.submit "Create Account", class: "btn btn-primary" %>
-<%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
-
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <%= f.submit "Create Account", class: "btn btn-primary", data: {action: "click->bs-modal#submitEnd"}  %>
     </div>
   <% end %>
-  </div>
-
+</div>
