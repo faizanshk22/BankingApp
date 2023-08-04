@@ -72,13 +72,13 @@ class UsersController < ApplicationController
   @user = User.find(params[:id])
   @user.update(approved: true)
 
-  redirect_to admins_index_path, notice: 'User approved successfully.'
+  redirect_to pending_path, notice: 'User approved successfully.'
   end
 
   def decline
   @user = User.find(params[:id])
   @user.destroy
-  redirect_to admins_index_path, notice: 'User declined successfully.'
+  redirect_to pending_path, notice: 'User declined successfully.'
   end
   def active_for_authentication?
   super && (approved? || admin?)
